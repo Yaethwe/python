@@ -38,17 +38,17 @@ def print_self():
         f_contents = f.read()
         print(f_contents)
 def write(m):
-    if m is 'yt':
+    if m == 'yt':
         with open('index.html', 'w') as f:
             f.write(html_text)
         with open('style.css', 'w') as f:
             f.write(yt_css_text)
         with open('script.js', 'w') as f:
             f.write(yt_js_text)
-    elif m is 'blank':
+    elif m == 'blank':
         create()
         pass
-    elif m is 'linked':
+    elif m == 'linked':
         create()
         with open('index.html', 'w') as f:
             f.write(html_text)
@@ -62,7 +62,7 @@ def start():
         global mode
         mode = 'yt'
         write(mode)
-    elif q is 'print_self':
+    elif q == 'print_self':
         print_self()
         input('press any keys to continue :')
         start()

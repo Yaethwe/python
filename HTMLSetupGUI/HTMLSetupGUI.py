@@ -4,27 +4,32 @@ import sys
 import zipfile
 import webbrowser as wb
 
-app = Tk()
-app.title('HTML Setup GUI')
-app.geometry('600x700')
-app.resizable(width=False,height=True)
-HTML_default='''
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel='stylesheet' href='style.css'>
-        <meta charset='utf-8'>
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>HelloWorld!</h1>
-        <label>HTML Project Setup GUI</label><br>
-        <label>Created By YeaeThawe</label><br>
-        <label>yeaethawe@gmail.com</label><br>
-    </body>
-    <script src='script.js'></script>
-</html>
+#basic variables
+current_version = '1.0'
+def_font = ('sans-serif',20)
+info_version = '''
+This version is the first version of HTML Setup GUI.
+If you found any mistake in this app connect us.
+    email: yeaethawe@gmail.com
+    phone: +959956571727
 '''
+HTML_default='''
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <link rel='stylesheet' href='style.css'>
+            <meta charset='utf-8'>
+            <title>Document</title>
+        </head>
+        <body>
+            <h1>HelloWorld!</h1>
+            <label>HTML Project Setup GUI</label><br>
+            <label>Created By YeaeThawe</label><br>
+            <label>yeaethawe@gmail.com</label><br>
+        </body>
+        <script src='script.js'></script>
+    </html>
+    '''
 CSS_default='''
 body{
   background-color:gray;
@@ -42,6 +47,8 @@ label{
 JS_default='''
 const body = document.querySelector('body');
 '''
+    
+#functions
 def webso():
     wb.open('https://gardennet.netlify.app/explorer?gid=2&gname=HTMLsetupGUI')
 def unzip(h,t):
@@ -69,7 +76,9 @@ def default():
 def setupSuccessful():
     ss = Tk()
     ss.title('Setup Successful')
+    ss.iconbitmap(r'icon.ico')
     ss.geometry('400x200')
+    ss.resizable(width=False,height=False)
     ssl = Label(ss,text="Setup Successful",fg='orange',font=('sans-serif',20))
     btn = Button(ss,text='OK',bg='blue',fg='white',command=ss.destroy)
     ssl.pack()
@@ -77,6 +86,7 @@ def setupSuccessful():
     ss.mainloop()
 def fileCreatorGUI():
     fc = Tk()
+    fc.iconbitmap(r'icon.ico')
     l=Label(fc,text='File Creator',fg='blue',font=('sans-serif',20))
     f=Frame(fc)
     def createin():
@@ -85,6 +95,7 @@ def fileCreatorGUI():
         slab.config(text='"'+e+'" was created successfully.',fg='blue')
     fc.title('File Creator')
     fc.geometry('400x200')
+    fc.resizable(width=False,height=False)
     ent1 = Entry(f,width=25)
     btn1 = Button(f,text='create',command=createin)
     slab = Label(f,text='')
@@ -96,6 +107,7 @@ def fileCreatorGUI():
     fc.mainloop()
 def unzipGUI():
     fc = Tk()
+    fc.iconbitmap(r'icon.ico')
     l=Label(fc,text='Unzipper',fg='blue',font=('sans-serif',20))
     f=Frame(fc)
     def unzipin():
@@ -104,6 +116,7 @@ def unzipGUI():
         slab.config(text='"'+e+'" was unzipped successfully.',fg='blue')
     fc.title('Unzipper')
     fc.geometry('400x200')
+    fc.resizable(width=False,height=False)
     ent1 = Entry(f,width=25)
     btn1 = Button(f,text='unzip',command=unzipin)
     slab = Label(f,text='')
@@ -113,6 +126,25 @@ def unzipGUI():
     l.pack()
     f.pack()
     fc.mainloop()
+def version():
+    v = Tk()
+    v.title('Version '+current_version)
+    v.iconbitmap(r'icon.ico')
+    v.geometry('400x500')
+    v.resizable(width=False,height=False)
+    lb1 = Label(v,text='Version '+current_version,fg='blue',font=def_font)
+    lb2 = Label(v,text=info_version,fg='gray',font=('sans-serif',16))
+    lb1.pack()
+    lb2.pack()
+    v.mainloop()
+
+#setup the main window
+app = Tk()
+app.title('HTML Setup GUI')
+app.geometry('600x700')
+app.iconbitmap(r'icon.ico')
+app.resizable(width=False,height=True)
+
 menubar = Menu(app)
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="New Page", command=newpage)
@@ -125,6 +157,7 @@ filemenu.add_command(label="Exit", command=close)
 menubar.add_cascade(label="File", menu=filemenu)
 infomenu = Menu(menubar, tearoff=0)
 infomenu.add_command(label="Website", command=webso)
+infomenu.add_command(label="Version", command=version)
 menubar.add_cascade(label="Info", menu=infomenu)
 app.config(menu=menubar)
 html_l = Label(app, text="HTML")
@@ -142,7 +175,9 @@ css_t.pack()
 js_l.pack()
 js_t.pack()
 setupBtn.pack()
-#create('')
 default()
 app.mainloop()
+
+#start the app
+start()
 
